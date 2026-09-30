@@ -467,37 +467,40 @@ document.querySelectorAll('.rv').forEach(el => io.observe(el));
       c._t = t;
     }
   }
-  // drag
-  stage.addEventListener('pointerdown', e => {
-    dragging = true; stage.classList.add('dragging');
-    dragX = e.clientX; dragS = s; vel = 0; lastPX = e.clientX; dragDist = 0;
-    arrowAnim = null;
-    try { stage.setPointerCapture(e.pointerId); } catch(_){}
-  });
-  stage.addEventListener('pointermove', e => {
+  // drag (window-level move/up so no pointer capture is needed; card clicks stay native)
+  function onDragMove(e){
     if (!dragging) return;
     const dx = e.clientX - dragX;
     dragDist = Math.max(dragDist, Math.abs(dx));
     s = dragS - dx;
     vel = (lastPX - e.clientX); lastPX = e.clientX;
     layout();
-  });
-  function endDrag(){
+  }
+  function onDragEnd(){
+    window.removeEventListener('pointermove', onDragMove);
+    window.removeEventListener('pointerup', onDragEnd);
+    window.removeEventListener('pointercancel', onDragEnd);
     if (!dragging) return;
     dragging = false; stage.classList.remove('dragging');
     s += vel * 6; // fling
   }
-  stage.addEventListener('pointerup', e => {
-    const wasDrag = dragDist > 8;
-    endDrag();
-    if (!wasDrag){ // plain click on a card -> open its product page
-      const el = document.elementFromPoint(e.clientX, e.clientY);
-      const card = el && el.closest ? el.closest('.p-card') : null;
-      if (card && card.dataset.url) window.location.href = card.dataset.url;
-    }
+  stage.addEventListener('pointerdown', e => {
+    dragging = true; stage.classList.add('dragging');
+    dragX = e.clientX; dragS = s; vel = 0; lastPX = e.clientX; dragDist = 0;
+    arrowAnim = null;
+    window.addEventListener('pointermove', onDragMove);
+    window.addEventListener('pointerup', onDragEnd);
+    window.addEventListener('pointercancel', onDragEnd);
   });
-  stage.addEventListener('pointercancel', endDrag);
   stage.addEventListener('dragstart', e => e.preventDefault());
+  // plain click on a card (not a drag) -> open its product page
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      if (dragDist > 8) return; // it was a drag, not a click
+      const url = card.dataset.url;
+      if (url) window.location.href = url;
+    });
+  });
   stage.addEventListener('mouseenter', () => { hovering = true; targetSpeed = 0; });
   stage.addEventListener('mouseleave', () => { hovering = false; if (!reduceMotion) targetSpeed = AUTO; });
   // arrows
