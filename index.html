@@ -42,10 +42,12 @@ a{text-decoration:none;color:inherit}
 .nav.scrolled{border-bottom-color:var(--line);box-shadow:0 4px 24px rgba(0,0,0,.4)}
 .nav.scrolled::after{opacity:1}
 @keyframes navShine{from{background-position:200% 0}to{background-position:-20% 0}}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;position:relative}
 .brand img{height:38px;width:auto;animation:logoFloat 5s ease-in-out infinite}
 @keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
-.nav-links{display:flex;align-items:center;gap:30px;list-style:none}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none;position:absolute;left:50%;transform:translateX(-50%);margin:0;padding:0;white-space:nowrap}
+.nav-cta{margin-left:auto;flex-shrink:0}
+.nav-cta-li.mob{display:none}
 .nav-links a{position:relative;font-size:14.5px;font-weight:500;color:#d7e3fa;transition:color .2s;padding:6px 0}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),#bcd6ff);transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.2,.7,.3,1)}
 .nav-links a:hover{color:var(--accent)}
@@ -92,6 +94,7 @@ section{padding:96px 0}
 .river{position:absolute;inset:0;transform-style:preserve-3d}
 .p-card{position:absolute;left:50%;top:46%;width:400px;background:linear-gradient(180deg,rgba(22,44,96,.92),rgba(10,24,60,.94));border:1px solid rgba(140,180,255,.18);border-radius:var(--radius);overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.45);user-select:none;-webkit-user-drag:none;will-change:transform,opacity}
 .p-card:hover{box-shadow:0 24px 70px rgba(20,110,245,.35);border-color:rgba(140,180,255,.45)}
+.p-card{cursor:pointer}
 .p-media{aspect-ratio:16/10;background:#0e1e42;overflow:hidden;pointer-events:none}
 .p-media video{width:100%;height:100%;object-fit:cover}
 .p-body{padding:24px 24px 26px}
@@ -143,8 +146,10 @@ footer{border-top:1px solid var(--line);background:rgba(6,14,36,.55);backdrop-fi
 /* ===== RESPONSIVE ===== */
 @media(max-width:1024px){.grid-4{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(2,1fr)}.foot-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:768px){
-  .nav-links{display:none;position:absolute;top:68px;left:0;right:0;background:rgba(8,18,46,.97);flex-direction:column;align-items:flex-start;padding:20px 24px 26px;gap:18px;border-bottom:1px solid var(--line);box-shadow:0 20px 40px rgba(0,0,0,.4)}
+  .nav-links{display:none;position:absolute;top:68px;left:0;right:0;transform:none;background:rgba(8,18,46,.97);flex-direction:column;align-items:flex-start;padding:20px 24px 26px;gap:18px;border-bottom:1px solid var(--line);box-shadow:0 20px 40px rgba(0,0,0,.4)}
   .nav-links.open{display:flex}
+  .nav-cta{display:none}
+  .nav-cta-li.mob{display:list-item}
   .nav-cta-li{width:100%}.nav-cta-li .btn{width:100%;justify-content:center}
   .burger{display:block}
   .grid-3,.grid-4{grid-template-columns:1fr}
@@ -181,8 +186,9 @@ footer{border-top:1px solid var(--line);background:rgba(6,14,36,.55);backdrop-fi
       <li><a href="#company">Our Company</a></li>
       <li><a href="https://devniques.com/blog/">Blog</a></li>
       <li><a href="#contact">Contact Us</a></li>
-      <li class="nav-cta-li"><a class="btn btn-sm" href="#cta">Get a Quote</a></li>
+      <li class="nav-cta-li mob"><a class="btn btn-sm" href="#cta">Get a Quote</a></li>
     </ul>
+    <a class="btn btn-sm nav-cta" href="#cta">Get a Quote</a>
   </div>
 </header>
 
@@ -218,43 +224,43 @@ footer{border-top:1px solid var(--line);background:rgba(6,14,36,.55);backdrop-fi
   </div>
   <div class="stage-3d rv" id="stage3d">
     <div class="river" id="river">
-      <article class="p-card" data-name="BuzzFlo">
+      <article class="p-card" data-name="BuzzFlo" data-url="https://devniques.com/software-solutions/">
         <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/buzzflo.jpg" src="videos/buzzflo.mp4"></video></div>
         <div class="p-body"><h3>BuzzFlo</h3><p>All-in-one business platform for chat, tasks, projects, CRM, finance &amp; more.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </article>
-      <article class="p-card" data-name="Post Marrow">
+      <article class="p-card" data-name="Post Marrow" data-url="https://devniques.com/microsoft-365/">
         <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/postmarrow.jpg" src="videos/postmarrow.mp4"></video></div>
         <div class="p-body"><h3>Post Marrow</h3><p>Professional business email with security you can trust.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </article>
-      <article class="p-card" data-name="Signvero">
+      <article class="p-card" data-name="Signvero" data-url="https://devniques.com/software-solutions/">
         <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/signvero.jpg" src="videos/signvero.mp4"></video></div>
         <div class="p-body"><h3>Signvero</h3><p>Digital signage &amp; emergency alert management.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </article>
-      <article class="p-card" data-name="Mobilient MDM">
+      <article class="p-card" data-name="Mobilient MDM" data-url="https://devniques.com/enterprise-mobility-solutions-ems/">
         <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/mobilient.jpg" src="videos/mobilient.mp4"></video></div>
         <div class="p-body"><h3>Mobilient MDM</h3><p>Manage &amp; secure all your company devices.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </article>
-      <article class="p-card" data-name="Ship Flow">
+      <article class="p-card" data-name="Ship Flow" data-url="https://devniques.com/ship-flow/">
         <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/shipflow.jpg" src="videos/shipflow.mp4"></video></div>
         <div class="p-body"><h3>Ship Flow</h3><p>All-in-one Shipping &amp; Forwarding Management System &mdash; track shipments in real time from a single cloud-based interface.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </article>
-      <article class="p-card" data-name="TrackOnMoves">
+      <article class="p-card" data-name="TrackOnMoves" data-url="https://devniques.com/track-on-moves/">
         <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/trackonmoves.jpg" src="videos/trackonmoves.mp4"></video></div>
         <div class="p-body"><h3>TrackOnMoves</h3><p>Fleet Management Software gives you live visibility into every vehicle, driver, and route.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </article>
-      <article class="p-card" data-name="Itmenaan">
+      <article class="p-card" data-name="Itmenaan" data-url="https://devniques.com/itmenaan/">
         <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/itmenaan.jpg" src="videos/itmenaan.mp4"></video></div>
         <div class="p-body"><h3>Itmenaan</h3><p>Pakistan&rsquo;s trusted buy &amp; sell marketplace &mdash; a modern online marketplace connecting buyers and sellers across Pakistan.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </article>
-      <article class="p-card" data-name="Hospital Management">
+      <article class="p-card" data-name="Hospital Management" data-url="https://devniques.com/hospital-management/">
         <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/hospital.jpg" src="videos/hospital.mp4"></video></div>
         <div class="p-body"><h3>Hospital Management</h3><p>Centralized healthcare platform &mdash; hospital operations in one platform, supporting 8+ user types and 60+ modules.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </article>
-      <article class="p-card" data-name="Microsoft 365">
+      <article class="p-card" data-name="Microsoft 365" data-url="https://devniques.com/microsoft-365/">
         <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/m365.jpg" src="videos/m365.mp4"></video></div>
         <div class="p-body"><h3>Microsoft 365</h3><p>Boost productivity with Microsoft 365 &mdash; powerful apps, AI-powered Copilot assistance, and trusted cloud storage.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </article>
-      <article class="p-card" data-name="ERP &amp; CRM">
+      <article class="p-card" data-name="ERP &amp; CRM" data-url="https://devniques.com/erp-crm/">
         <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/erpcrm.jpg" src="videos/erpcrm.mp4"></video></div>
         <div class="p-body"><h3>ERP &amp; CRM</h3><p>We help businesses unify their operations and customer management through powerful ERP and CRM solutions.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
       </article>
@@ -416,7 +422,7 @@ document.querySelectorAll('.rv').forEach(el => io.observe(el));
   let s = 0;                       // scroll position (grows -> cards move left)
   const AUTO = reduceMotion ? 0 : 46;  // px/sec right-to-left
   let speed = AUTO, targetSpeed = AUTO;
-  let dragging = false, dragX = 0, dragS = 0, vel = 0, lastPX = 0;
+  let dragging = false, dragX = 0, dragS = 0, vel = 0, lastPX = 0, dragDist = 0;
   let hovering = false, inView = true, arrowAnim = null;
 
   function measure(){
@@ -464,13 +470,14 @@ document.querySelectorAll('.rv').forEach(el => io.observe(el));
   // drag
   stage.addEventListener('pointerdown', e => {
     dragging = true; stage.classList.add('dragging');
-    dragX = e.clientX; dragS = s; vel = 0; lastPX = e.clientX;
+    dragX = e.clientX; dragS = s; vel = 0; lastPX = e.clientX; dragDist = 0;
     arrowAnim = null;
     try { stage.setPointerCapture(e.pointerId); } catch(_){}
   });
   stage.addEventListener('pointermove', e => {
     if (!dragging) return;
     const dx = e.clientX - dragX;
+    dragDist = Math.max(dragDist, Math.abs(dx));
     s = dragS - dx;
     vel = (lastPX - e.clientX); lastPX = e.clientX;
     layout();
@@ -480,7 +487,15 @@ document.querySelectorAll('.rv').forEach(el => io.observe(el));
     dragging = false; stage.classList.remove('dragging');
     s += vel * 6; // fling
   }
-  stage.addEventListener('pointerup', endDrag);
+  stage.addEventListener('pointerup', e => {
+    const wasDrag = dragDist > 8;
+    endDrag();
+    if (!wasDrag){ // plain click on a card -> open its product page
+      const el = document.elementFromPoint(e.clientX, e.clientY);
+      const card = el && el.closest ? el.closest('.p-card') : null;
+      if (card && card.dataset.url) window.location.href = card.dataset.url;
+    }
+  });
   stage.addEventListener('pointercancel', endDrag);
   stage.addEventListener('dragstart', e => e.preventDefault());
   stage.addEventListener('mouseenter', () => { hovering = true; targetSpeed = 0; });
