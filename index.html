@@ -95,6 +95,7 @@ section{padding:96px 0}
 /* ===== 3D PRODUCT RIVER (Webflow-style slides) ===== */
 .drag-hint{display:flex;align-items:center;justify-content:center;gap:10px;color:#8fa6cf;font-size:13.5px;font-weight:600;letter-spacing:1px;margin:-28px 0 26px;text-transform:uppercase}
 .drag-hint svg{animation:nudge 2.2s ease-in-out infinite}
+.tap-hint{color:var(--cyan,#00f0ff);font-weight:700}
 @keyframes nudge{0%,100%{transform:translateX(-4px)}50%{transform:translateX(4px)}}
 .stage-3d{position:relative;height:600px;perspective:1500px;overflow:hidden;cursor:grab;touch-action:pan-y}
 .stage-3d.dragging{cursor:grabbing}
@@ -291,7 +292,7 @@ body.ready .hero h1 .w>span{transform:none}
   <div class="wrap sec-head">
     <span class="eyebrow rv">Product Showcase</span>
     <h2 class="rv">Our Products</h2>
-    <p class="rv">Powerful products and platforms built to solve real business challenges &mdash; ready to deploy, easy to scale, and designed around your workflows.</p>
+    <p class="rv">Powerful products and platforms built to solve real business challenges &mdash; ready to deploy, easy to scale, and designed around your workflows. <span class="tap-hint">Tap any product card to view its full details.</span></p>
   </div>
   <div class="drag-hint rv">
     <svg width="26" height="14" viewBox="0 0 26 14" fill="none" stroke="#8fa6cf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7h24M18 1l6 6-6 6"/></svg>
@@ -748,12 +749,24 @@ addEventListener('keydown', e => { if (e.key === 'Escape') closeProductModal(); 
     vel = (lastPX - e.clientX); lastPX = e.clientX;
     layout();
   }
-  function onDragEnd(){
+  function onDragEnd(e){
     window.removeEventListener('pointermove', onDragMove);
     window.removeEventListener('pointerup', onDragEnd);
     window.removeEventListener('pointercancel', onDragEnd);
     if (!dragging) return;
     dragging = false; stage.classList.remove('dragging');
+    // tap (not a drag): open the tapped card's detail modal.
+    // Handled on pointerup instead of click: on touch devices the browser may
+    // fire pointercancel instead of click (touch-action:pan-y scroll takeover),
+    // and the carousel keeps moving between pointerdown and click, so the
+    // click target is unreliable. elementFromPoint finds the card under the
+    // finger at release time.
+    if (e && e.type === 'pointerup' && dragDist <= 10){
+      const el = document.elementFromPoint(e.clientX, e.clientY);
+      const card = el && el.closest ? el.closest('.p-card') : null;
+      const link = el && el.closest ? el.closest('a') : null;
+      if (card && !link && card.dataset.modal){ openProductModal(card); return; }
+    }
     s += vel * 6; // fling
   }
   stage.addEventListener('pointerdown', e => {
@@ -765,14 +778,7 @@ addEventListener('keydown', e => { if (e.key === 'Escape') closeProductModal(); 
     window.addEventListener('pointercancel', onDragEnd);
   });
   stage.addEventListener('dragstart', e => e.preventDefault());
-  // plain click on a card (not a drag) -> open its detail modal
-  cards.forEach(card => {
-    card.addEventListener('click', e => {
-      if (dragDist > 8) { e.preventDefault(); return; } // drag, not a click
-      if (e.target.closest('a')) return; // "Learn more" keeps its product-page link
-      openProductModal(card);
-    });
-  });
+  // tap-to-open is handled in onDragEnd (pointerup) for reliability on touch + moving carousel
   stage.addEventListener('mouseenter', () => { hovering = true; targetSpeed = 0; });
   stage.addEventListener('mouseleave', () => { hovering = false; if (!reduceMotion) targetSpeed = AUTO; });
   // arrows
