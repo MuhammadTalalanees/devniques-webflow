@@ -7,18 +7,21 @@
 <meta name="description" content="We deliver innovative digital, cloud, and software solutions designed to streamline operations, enhance customer experiences, and accelerate business growth.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="icon" href="logo-dark.png">
 <style>
 :root{
-  --bg:#0a1633; --ink:#ffffff; --muted:#b9c8e4; --line:rgba(140,180,255,.14);
-  --blue:#2f7ff7; --blue-dark:#0d55c4; --blue-soft:rgba(47,127,247,.16);
-  --accent:#6aa5ff;
+  --bg:#030712; --ink:#ffffff; --muted:#b9c8e4; --line:rgba(140,180,255,.14);
+  --blue:#2b7fff; --blue-dark:#0d55c4; --blue-soft:rgba(47,127,247,.16);
+  --accent:#00e5ff; --cyan:#00f0ff; --purple:#8a2be2;
+  --neon:linear-gradient(135deg,#00f0ff 0%,#2b7fff 50%,#8a2be2 100%);
   --radius:18px; --shadow:0 12px 40px rgba(0,0,0,.35);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);background:linear-gradient(135deg,#081026 0%,#0a1633 45%,#12306e 110%) fixed;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;color:var(--ink);background:linear-gradient(180deg,#030712 0%,#060e29 50%,#030712 100%) fixed;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:'Space Grotesk','Plus Jakarta Sans',sans-serif}
 /* ===== Animated page background (whole page) ===== */
 .bg-anim{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
 .bg-spin{position:absolute;left:50%;top:38%;width:170vmax;height:170vmax;transform:translate(-50%,-50%);background:conic-gradient(from 0deg,transparent 0deg,rgba(94,160,255,.08) 28deg,transparent 64deg,transparent 178deg,rgba(20,110,245,.10) 208deg,transparent 246deg);animation:spinSlow 48s linear infinite;filter:blur(12px)}
@@ -32,6 +35,13 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);bac
 @keyframes drift2{from{transform:translate(0,0) scale(1.1)}to{transform:translate(-140px,-70px) scale(.95)}}
 @keyframes drift3{from{transform:translate(0,0) scale(1)}to{transform:translate(-100px,90px) scale(1.12)}}
 .bg-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(140,190,255,.13) 1.2px,transparent 1.2px);background-size:34px 34px;mask-image:linear-gradient(180deg,transparent,#000 12%,#000 88%,transparent);-webkit-mask-image:linear-gradient(180deg,transparent,#000 12%,#000 88%,transparent)}
+/* ===== Neon glow orbs + mesh (from code.html) ===== */
+.orb-glow{position:fixed;border-radius:50%;filter:blur(95px);pointer-events:none;z-index:-1;opacity:.38;animation:floatGlow 22s infinite alternate ease-in-out}
+.orb-1{top:8%;left:4%;width:480px;height:480px;background:radial-gradient(circle,#00f0ff,#2b7fff)}
+.orb-2{top:44%;right:-6%;width:550px;height:550px;background:radial-gradient(circle,#8a2be2,#1d4ed8);animation-duration:26s}
+.orb-3{bottom:4%;left:24%;width:600px;height:600px;background:radial-gradient(circle,#2563eb,#00f0ff);animation-duration:30s}
+@keyframes floatGlow{0%{transform:translate(0,0) scale(1)}50%{transform:translate(60px,40px) scale(1.15)}100%{transform:translate(-40px,80px) scale(.95)}}
+.grid-mesh{position:fixed;inset:0;background-size:48px 48px;background-image:linear-gradient(to right,rgba(99,149,255,.045) 1px,transparent 1px),linear-gradient(to bottom,rgba(99,149,255,.045) 1px,transparent 1px);pointer-events:none;z-index:-1}
 img{max-width:100%;display:block}
 a{text-decoration:none;color:inherit}
 .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
@@ -52,10 +62,10 @@ a{text-decoration:none;color:inherit}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),#bcd6ff);transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.2,.7,.3,1)}
 .nav-links a:hover{color:var(--accent)}
 .nav-links a:hover::after{transform:scaleX(1)}
-.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:600;font-size:15px;padding:12px 26px;border-radius:999px;border:none;cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s;box-shadow:0 8px 20px rgba(20,110,245,.28)}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:8px;background:var(--neon);color:#fff;font-weight:600;font-size:15px;padding:12px 26px;border-radius:999px;border:none;cursor:pointer;transition:transform .2s,box-shadow .25s;box-shadow:0 8px 28px rgba(0,200,255,.35)}
 .btn::before{content:"";position:absolute;top:0;bottom:0;width:60px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);left:-80px;transform:skewX(-18deg);animation:btnShine 3.6s ease-in-out infinite}
 @keyframes btnShine{0%,55%{left:-80px}90%,100%{left:130%}}
-.btn:hover{background:var(--blue-dark);transform:translateY(-2px)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(0,240,255,.55)}
 .btn-sm{padding:10px 22px;font-size:14px}
 .btn-outline{background:rgba(255,255,255,.06);color:#fff;border:1.5px solid rgba(255,255,255,.28);box-shadow:none}
 .btn-outline::before{display:none}
@@ -68,14 +78,14 @@ a{text-decoration:none;color:inherit}
 .hero-inner{position:relative;max-width:860px;margin:0 auto}
 .eyebrow{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:22px}
 .hero h1{font-size:clamp(42px,6.4vw,76px);font-weight:800;letter-spacing:-2.5px;line-height:1.04;margin-bottom:24px}
-.hero h1 .accent{background:linear-gradient(100deg,var(--blue) 20%,#5ea0ff 50%,var(--blue) 80%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:accentFlow 6s linear infinite}
+.hero h1 .accent{background:linear-gradient(100deg,#2b7fff 10%,#00f0ff 45%,#8a2be2 90%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:accentFlow 6s linear infinite}
 @keyframes accentFlow{to{background-position:200% center}}
 .hero p.sub{font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:680px;margin:0 auto 38px;line-height:1.65}
 .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 /* ===== MARQUEE ===== */
 .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.03);overflow:hidden;padding:16px 0;user-select:none}
 .marquee-track{display:flex;gap:56px;width:max-content;animation:scroll 30s linear infinite}
-.marquee span{font-size:13.5px;font-weight:700;letter-spacing:2.5px;color:#93a9d4;white-space:nowrap}
+.marquee a{transition:color .2s}.marquee a:hover{color:#fff}.marquee a{font-size:13.5px;font-weight:700;letter-spacing:2.5px;color:#93a9d4;white-space:nowrap}
 @keyframes scroll{to{transform:translateX(-50%)}}
 /* ===== SECTIONS ===== */
 section{padding:96px 0}
@@ -93,7 +103,7 @@ section{padding:96px 0}
 .stage-3d::after{right:0;background:linear-gradient(-90deg,#0a1734,transparent)}
 .river{position:absolute;inset:0;transform-style:preserve-3d}
 .p-card{position:absolute;left:50%;top:46%;width:400px;background:linear-gradient(180deg,rgba(22,44,96,.92),rgba(10,24,60,.94));border:1px solid rgba(140,180,255,.18);border-radius:var(--radius);overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.45);user-select:none;-webkit-user-drag:none;will-change:transform,opacity}
-.p-card:hover{box-shadow:0 24px 70px rgba(20,110,245,.35);border-color:rgba(140,180,255,.45)}
+.p-card:hover{box-shadow:0 24px 70px rgba(0,240,255,.30);border-color:rgba(0,240,255,.5)}
 .p-card{cursor:pointer}
 .p-media{aspect-ratio:16/10;background:#0e1e42;overflow:hidden;pointer-events:none}
 .p-media video{width:100%;height:100%;object-fit:cover}
@@ -164,14 +174,80 @@ footer{border-top:1px solid var(--line);background:rgba(6,14,36,.55);backdrop-fi
   .marquee-track,.blob,.bg-spin,.hero-grid-bg,.hero h1 .accent,.btn::before,.nav::after,.cta-band::after,.brand img{animation:none!important}
   .rv{opacity:1;transform:none}
 }
+
+/* ===== ADVANCED LAYER ===== */
+#loader{position:fixed;inset:0;z-index:9999;background:#050c20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;transition:clip-path .9s cubic-bezier(.76,0,.24,1);clip-path:inset(0 0 0 0);animation:ldFail .1s 4s forwards}
+#loader.out{clip-path:inset(0 0 100% 0)}
+#loader.gone{display:none}
+@keyframes ldFail{to{visibility:hidden}}
+#loader img{height:54px;animation:ldPulse 1.6s ease-in-out infinite}
+@keyframes ldPulse{50%{transform:scale(1.06);filter:drop-shadow(0 0 18px rgba(94,160,255,.7))}}
+.ld-bar{width:220px;height:3px;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden}
+.ld-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),#9cc4ff);animation:ldFill 1.5s cubic-bezier(.6,0,.2,1) forwards}
+@keyframes ldFill{to{width:100%}}
+#loader small{color:#8fa6cf;font-size:12px;letter-spacing:4px;text-transform:uppercase}
+#progress{position:fixed;top:0;left:0;height:3px;width:100%;z-index:200;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,var(--blue),#9cc4ff,#fff);box-shadow:0 0 12px var(--blue)}
+#glow{position:fixed;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(circle,rgba(0,240,255,.14),transparent 65%);pointer-events:none;z-index:99;will-change:transform}
+.bg-dots{transform:translateY(calc(var(--sy,0) * -.06px))}
+.hero-inner{z-index:2}
+body:not(.ready) .hero .rv{opacity:0!important;transform:translateY(40px)!important}
+.hero .rv:nth-child(2){transition-delay:.15s}.hero .rv:nth-child(4){transition-delay:.45s}.hero .rv:nth-child(5){transition-delay:.6s}
+.hero h1.rv{opacity:1;transform:none}
+.hero h1 .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em}
+.hero h1 .w>span{display:inline-block;transform:translateY(110%) rotate(6deg);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+body.ready .hero h1 .w>span{transform:none}
+.card{--mx:50%;--my:50%;--o:0;background:radial-gradient(380px circle at var(--mx) var(--my),rgba(94,160,255,calc(var(--o) * .2)),transparent 55%),rgba(255,255,255,.045)}
+.card:hover{--o:1}
+.sec-head h2::after{content:"";display:block;width:0;height:3px;margin:18px auto 0;border-radius:3px;background:linear-gradient(90deg,var(--blue),#9cc4ff);transition:width 1s .3s cubic-bezier(.2,.8,.2,1)}
+.sec-head h2.in::after{width:72px}
+.vid-banner{transition:transform .2s ease-out}
+@media(max-width:768px){.chip{display:none}.stats{grid-template-columns:repeat(2,1fr)}#glow{display:none}}
+@media(prefers-reduced-motion:reduce){.chip,.scroll-cue::after,#loader img,.typer i{animation:none!important}.hero h1 .w>span{transform:none;transition:none}#loader{display:none}}
+
+#fx{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.learn{position:relative;z-index:4}
+.p-card a{-webkit-user-drag:none}
+.nav-links a.active{color:var(--accent)}.nav-links a.active::after{transform:scaleX(1)}
+#ring{position:fixed;left:0;top:0;width:38px;height:38px;margin:-19px 0 0 -19px;border:1.5px solid rgba(130,185,255,.7);border-radius:50%;pointer-events:none;z-index:9998;transition:width .25s,height .25s,margin .25s,background .25s,opacity .3s;opacity:0;will-change:transform}
+#ring.on{opacity:1}
+#ring.big{width:66px;height:66px;margin:-33px 0 0 -33px;background:rgba(70,140,255,.14)}
+#dot{position:fixed;left:0;top:0;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:#9cc4ff;pointer-events:none;z-index:9998;opacity:0;will-change:transform}
+#dot.on{opacity:1}
+@media(hover:none){#ring,#dot{display:none}}
+/* ===== PRODUCT DETAIL MODAL (from code.html) ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(2,6,20,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:10001;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.modal-overlay.active{opacity:1;pointer-events:auto}
+.modal-card{background:linear-gradient(145deg,#0a1738,#050d24);border:1px solid rgba(0,240,255,.45);box-shadow:0 0 60px rgba(0,240,255,.30),0 30px 80px rgba(0,0,0,.6);border-radius:24px;max-width:620px;width:100%;max-height:88vh;overflow-y:auto;position:relative;transform:scale(.93) translateY(18px);transition:transform .32s cubic-bezier(.2,.8,.2,1);padding:0}
+.modal-overlay.active .modal-card{transform:scale(1) translateY(0)}
+.modal-media{position:relative;height:200px;overflow:hidden;border-radius:24px 24px 0 0;background:#091436}
+.modal-media video{width:100%;height:100%;object-fit:cover}
+.modal-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(5,13,36,.85))}
+.modal-body{padding:30px 32px 32px}
+.modal-close-btn{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;background:rgba(4,12,35,.75);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2}
+.modal-close-btn:hover{background:rgba(255,50,80,.25);border-color:#ff4757;color:#ff6b81;transform:rotate(90deg)}
+.modal-badge{display:inline-block;font-size:11px;font-weight:700;padding:5px 13px;border-radius:999px;background:rgba(0,240,255,.13);color:var(--cyan);border:1px solid rgba(0,240,255,.35);margin-bottom:14px;text-transform:uppercase;letter-spacing:1.5px}
+.modal-title{font-size:29px;font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:-.5px}
+.modal-summary{font-size:15.5px;color:#c0d5f8;line-height:1.7;margin-bottom:24px}
+.modal-feat-head{color:#fff;font-size:13px;font-weight:700;margin-bottom:14px;letter-spacing:1.5px;text-transform:uppercase}
+.modal-features{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+.m-feat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:13px;padding:13px 14px;display:flex;align-items:center;gap:11px;transition:border-color .2s}
+.m-feat:hover{border-color:rgba(0,240,255,.4)}
+.m-feat i{font-size:16px;color:var(--cyan);flex-shrink:0}
+.m-feat span{font-size:13.5px;font-weight:600;color:#e4efff;line-height:1.45}
+.modal-footer{display:flex;gap:12px;justify-content:flex-end;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap}
+@media(max-width:560px){.modal-features{grid-template-columns:1fr}.modal-body{padding:24px 22px 26px}.modal-media{height:160px}}
 </style>
 </head>
 <body id="top">
+<div id="loader"><img src="logo-white.png" alt="Devniques"><div class="ld-bar"><i></i></div><small>Smart Technology Solutions</small></div>
+<div id="progress"></div><div id="glow"></div><canvas id="fx" aria-hidden="true"></canvas><div id="ring"></div><div id="dot"></div>
 <div class="bg-anim" aria-hidden="true">
   <div class="bg-spin"></div>
   <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div>
   <div class="bg-dots"></div>
 </div>
+<div class="orb-glow orb-1"></div><div class="orb-glow orb-2"></div><div class="orb-glow orb-3"></div>
+<div class="grid-mesh"></div>
 
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
@@ -205,9 +281,9 @@ footer{border-top:1px solid var(--line);background:rgba(6,14,36,.55);backdrop-fi
   </div>
 </section>
 
-<div class="marquee" aria-hidden="true">
+<div class="marquee">
   <div class="marquee-track" id="marqueeTrack">
-    <span>RETAIL APPS</span><span>AI MARKETING</span><span>SCHOOL MANAGEMENT SYSTEM</span><span>HOSPITAL MANAGEMENT SYSTEM</span><span>EPOS</span><span>MICROSOFT 365</span><span>ERP &amp; CRM</span><span>CLOUD HOSTING</span><span>VDC / VPS</span>
+    <a href="https://devniques.com/digital-commerce-2/">RETAIL APPS</a><a href="https://devniques.com/digital-marketing-and-seo-services/">AI MARKETING</a><a href="https://devniques.com/software-solutions/">SCHOOL MANAGEMENT SYSTEM</a><a href="https://devniques.com/hospital-management/">HOSPITAL MANAGEMENT SYSTEM</a><a href="https://devniques.com/software-solutions/">EPOS</a><a href="https://devniques.com/microsoft-365/">MICROSOFT 365</a><a href="https://devniques.com/erp-crm/">ERP &amp; CRM</a><a href="https://devniques.com/managed-services/">CLOUD HOSTING</a><a href="https://devniques.com/managed-services/">VDC / VPS</a>
   </div>
 </div>
 
@@ -222,54 +298,55 @@ footer{border-top:1px solid var(--line);background:rgba(6,14,36,.55);backdrop-fi
     Drag to explore
     <svg width="26" height="14" viewBox="0 0 26 14" fill="none" stroke="#8fa6cf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:scaleX(-1)"><path d="M1 7h24M18 1l6 6-6 6"/></svg>
   </div>
-  <div class="stage-3d rv" id="stage3d">
-    <div class="river" id="river">
-      <article class="p-card" data-name="BuzzFlo" data-url="https://devniques.com/software-solutions/">
-        <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/buzzflo.jpg" src="videos/buzzflo.mp4"></video></div>
-        <div class="p-body"><h3>BuzzFlo</h3><p>All-in-one business platform for chat, tasks, projects, CRM, finance &amp; more.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </article>
-      <article class="p-card" data-name="Post Marrow" data-url="https://devniques.com/microsoft-365/">
-        <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/postmarrow.jpg" src="videos/postmarrow.mp4"></video></div>
-        <div class="p-body"><h3>Post Marrow</h3><p>Professional business email with security you can trust.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </article>
-      <article class="p-card" data-name="Signvero" data-url="https://devniques.com/software-solutions/">
-        <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/signvero.jpg" src="videos/signvero.mp4"></video></div>
-        <div class="p-body"><h3>Signvero</h3><p>Digital signage &amp; emergency alert management.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </article>
-      <article class="p-card" data-name="Mobilient MDM" data-url="https://devniques.com/enterprise-mobility-solutions-ems/">
-        <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/mobilient.jpg" src="videos/mobilient.mp4"></video></div>
-        <div class="p-body"><h3>Mobilient MDM</h3><p>Manage &amp; secure all your company devices.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </article>
-      <article class="p-card" data-name="Ship Flow" data-url="https://devniques.com/ship-flow/">
-        <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/shipflow.jpg" src="videos/shipflow.mp4"></video></div>
-        <div class="p-body"><h3>Ship Flow</h3><p>All-in-one Shipping &amp; Forwarding Management System &mdash; track shipments in real time from a single cloud-based interface.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </article>
-      <article class="p-card" data-name="TrackOnMoves" data-url="https://devniques.com/track-on-moves/">
-        <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/trackonmoves.jpg" src="videos/trackonmoves.mp4"></video></div>
-        <div class="p-body"><h3>TrackOnMoves</h3><p>Fleet Management Software gives you live visibility into every vehicle, driver, and route.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </article>
-      <article class="p-card" data-name="Itmenaan" data-url="https://devniques.com/itmenaan/">
-        <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/itmenaan.jpg" src="videos/itmenaan.mp4"></video></div>
-        <div class="p-body"><h3>Itmenaan</h3><p>Pakistan&rsquo;s trusted buy &amp; sell marketplace &mdash; a modern online marketplace connecting buyers and sellers across Pakistan.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </article>
-      <article class="p-card" data-name="Hospital Management" data-url="https://devniques.com/hospital-management/">
-        <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/hospital.jpg" src="videos/hospital.mp4"></video></div>
-        <div class="p-body"><h3>Hospital Management</h3><p>Centralized healthcare platform &mdash; hospital operations in one platform, supporting 8+ user types and 60+ modules.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </article>
-      <article class="p-card" data-name="Microsoft 365" data-url="https://devniques.com/microsoft-365/">
-        <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/m365.jpg" src="videos/m365.mp4"></video></div>
-        <div class="p-body"><h3>Microsoft 365</h3><p>Boost productivity with Microsoft 365 &mdash; powerful apps, AI-powered Copilot assistance, and trusted cloud storage.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </article>
-      <article class="p-card" data-name="ERP &amp; CRM" data-url="https://devniques.com/erp-crm/">
-        <div class="p-media"><video muted loop playsinline autoplay preload="auto" poster="videos/erpcrm.jpg" src="videos/erpcrm.mp4"></video></div>
-        <div class="p-body"><h3>ERP &amp; CRM</h3><p>We help businesses unify their operations and customer management through powerful ERP and CRM solutions.</p><span class="learn">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </article>
-    </div>
-  </div>
-  <div class="wrap car-nav rv">
+   <div class="wrap car-nav rv">
     <button class="car-btn" id="carPrev" aria-label="Previous products"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
     <button class="car-btn" id="carNext" aria-label="Next products"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
+  <div class="stage-3d rv" id="stage3d">
+    <div class="river" id="river">
+      <article class="p-card" data-name="BuzzFlo" data-modal="BuzzFlow" data-url="https://devniques.com/software-solutions/">
+        <div class="p-media"><video muted loop playsinline preload="metadata" poster="videos/buzzflo.jpg" src="videos/buzzflo.mp4"></video></div>
+        <div class="p-body"><h3>BuzzFlow</h3><p>All-in-one business platform for chat, tasks, projects, CRM, finance &amp; more.</p><a class="learn" href="https://devniques.com/software-solutions/" aria-label="Learn more about BuzzFlo">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </article>
+      <article class="p-card" data-name="Post Marrow" data-modal="PostMarrow" data-url="https://devniques.com/microsoft-365/">
+        <div class="p-media"><video muted loop playsinline preload="metadata" poster="videos/postmarrow.jpg" src="videos/postmarrow.mp4"></video></div>
+        <div class="p-body"><h3>Post Marrow</h3><p>Professional business email with security you can trust.</p><a class="learn" href="https://devniques.com/microsoft-365/" aria-label="Learn more about Post Marrow">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </article>
+      <article class="p-card" data-name="Signvero" data-modal="Signvero" data-url="https://devniques.com/software-solutions/">
+        <div class="p-media"><video muted loop playsinline preload="metadata" poster="videos/signvero.jpg" src="videos/signvero.mp4"></video></div>
+        <div class="p-body"><h3>Signvero</h3><p>Digital signage &amp; emergency alert management.</p><a class="learn" href="https://devniques.com/software-solutions/" aria-label="Learn more about Signvero">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </article>
+      <article class="p-card" data-name="Mobilient MDM" data-modal="Mobilient" data-url="https://devniques.com/enterprise-mobility-solutions-ems/">
+        <div class="p-media"><video muted loop playsinline preload="metadata" poster="videos/mobilient.jpg" src="videos/mobilient.mp4"></video></div>
+        <div class="p-body"><h3>Mobilient MDM</h3><p>Manage &amp; secure all your company devices.</p><a class="learn" href="https://devniques.com/enterprise-mobility-solutions-ems/" aria-label="Learn more about Mobilient MDM">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </article>
+      <article class="p-card" data-name="Ship Flow" data-modal="ShipFlow" data-url="https://devniques.com/ship-flow/">
+        <div class="p-media"><video muted loop playsinline preload="metadata" poster="videos/shipflow.jpg" src="videos/shipflow.mp4"></video></div>
+        <div class="p-body"><h3>Ship Flow</h3><p>All-in-one Shipping &amp; Forwarding Management System &mdash; track shipments in real time from a single cloud-based interface.</p><a class="learn" href="https://devniques.com/ship-flow/" aria-label="Learn more about Ship Flow">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </article>
+      <article class="p-card" data-name="TrackOnMoves" data-modal="TrackOnMoves" data-url="https://devniques.com/track-on-moves/">
+        <div class="p-media"><video muted loop playsinline preload="metadata" poster="videos/trackonmoves.jpg" src="videos/trackonmoves.mp4"></video></div>
+        <div class="p-body"><h3>TrackOnMoves</h3><p>Fleet Management Software gives you live visibility into every vehicle, driver, and route.</p><a class="learn" href="https://devniques.com/track-on-moves/" aria-label="Learn more about TrackOnMoves">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </article>
+      <article class="p-card" data-name="Itmenaan" data-modal="Itmenaan" data-url="https://devniques.com/itmenaan/">
+        <div class="p-media"><video muted loop playsinline preload="metadata" poster="videos/itmenaan.jpg" src="videos/itmenaan.mp4"></video></div>
+        <div class="p-body"><h3>Itmenaan</h3><p>Pakistan&rsquo;s trusted buy &amp; sell marketplace &mdash; a modern online marketplace connecting buyers and sellers across Pakistan.</p><a class="learn" href="https://devniques.com/itmenaan/" aria-label="Learn more about Itmenaan">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </article>
+      <article class="p-card" data-name="Hospital Management" data-modal="Hospital" data-url="https://devniques.com/hospital-management/">
+        <div class="p-media"><video muted loop playsinline preload="metadata" poster="videos/hospital.jpg" src="videos/hospital.mp4"></video></div>
+        <div class="p-body"><h3>Hospital Management</h3><p>Centralized healthcare platform &mdash; hospital operations in one platform, supporting 8+ user types and 60+ modules.</p><a class="learn" href="https://devniques.com/hospital-management/" aria-label="Learn more about Hospital Management">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </article>
+      <article class="p-card" data-name="Microsoft 365" data-modal="Microsoft365" data-url="https://devniques.com/microsoft-365/">
+        <div class="p-media"><video muted loop playsinline preload="metadata" poster="videos/m365.jpg" src="videos/m365.mp4"></video></div>
+        <div class="p-body"><h3>Microsoft 365</h3><p>Boost productivity with Microsoft 365 &mdash; powerful apps, AI-powered Copilot assistance, and trusted cloud storage.</p><a class="learn" href="https://devniques.com/microsoft-365/" aria-label="Learn more about Microsoft 365">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </article>
+      <article class="p-card" data-name="ERP &amp; CRM" data-modal="ERPCRM" data-url="https://devniques.com/erp-crm/">
+        <div class="p-media"><video muted loop playsinline preload="metadata" poster="videos/erpcrm.jpg" src="videos/erpcrm.mp4"></video></div>
+        <div class="p-body"><h3>ERP &amp; CRM</h3><p>We help businesses unify their operations and customer management through powerful ERP and CRM solutions.</p><a class="learn" href="https://devniques.com/erp-crm/" aria-label="Learn more about ERP and CRM">Learn more <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </article>
+    </div>
+  </div>
+ 
 </section>
 
 <section id="offer">
@@ -393,6 +470,25 @@ footer{border-top:1px solid var(--line);background:rgba(6,14,36,.55);backdrop-fi
   </div>
 </footer>
 
+<!-- Product detail modal -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <button class="modal-close-btn" id="modalX" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    <div class="modal-media"><video id="modalVideo" muted loop playsinline preload="metadata"></video></div>
+    <div class="modal-body">
+      <span class="modal-badge" id="modalBadge"></span>
+      <h3 class="modal-title" id="modalTitle"></h3>
+      <p class="modal-summary" id="modalSummary"></p>
+      <div class="modal-feat-head">Included Capabilities &amp; Modules</div>
+      <div class="modal-features" id="modalFeatures"></div>
+      <div class="modal-footer">
+        <button class="btn btn-outline btn-sm" id="modalCloseBtn">Close</button>
+        <a class="btn btn-sm" id="modalVisit" href="#" target="_blank" rel="noopener">Visit Product Page <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 // Sticky nav shadow
 const nav = document.getElementById('nav');
@@ -407,6 +503,182 @@ mt.innerHTML += mt.innerHTML;
 // Scroll reveals
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.12});
 document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+// ===== PRODUCT DETAIL MODAL (data + open/close, from code.html) =====
+const productData = {
+  BuzzFlow: {
+    badge: "All-In-One Enterprise Platform",
+    title: "BuzzFlow Business OS",
+    summary: "BuzzFlow is Devniques' flagship digital workplace architecture. It merges instant departmental messaging, Kanban and Gantt project management, client pipeline CRM, and automated bookkeeping into a singular dashboard.",
+    features: [
+      { icon: "fa-comments", text: "Encrypted Departmental Team Chat & Channels" },
+      { icon: "fa-list-check", text: "Milestone Tracking & Sprint Task Boards" },
+      { icon: "fa-address-book", text: "Full Lifecycle Customer Relationship Management (CRM)" },
+      { icon: "fa-file-invoice-dollar", text: "Automated Invoicing, Expenses & Financial Ledgers" },
+      { icon: "fa-bell", text: "Real-time Webhook & Mobile Push Notifications" },
+      { icon: "fa-lock", text: "Role-Based Permissions & Enterprise Audit Logs" }
+    ]
+  },
+  Hospital: {
+    badge: "Comprehensive Healthcare Ecosystem",
+    title: "Hospital Management System (HMS)",
+    summary: "An enterprise-grade hospital automation system trusted by healthcare providers. Built to coordinate over 8 distinct medical user groups and 60+ specialty modules with zero downtime.",
+    features: [
+      { icon: "fa-user-doctor", text: "Doctors OPD Queue & Digital Prescription Portal" },
+      { icon: "fa-bed-pulse", text: "IPD Bed Allocation, Vitals & Nurse Station Monitoring" },
+      { icon: "fa-pills", text: "Automated Pharmacy Inventory & Batch Expiry Warnings" },
+      { icon: "fa-flask-vial", text: "Pathology Lab Testing & Barcode Sample Reports" },
+      { icon: "fa-receipt", text: "Insurance TPA Claim Handling & Multi-counter Billing" },
+      { icon: "fa-shield-halved", text: "HIPAA Compliant Electronic Medical Records (EMR)" }
+    ]
+  },
+  ShipFlow: {
+    badge: "Maritime & Freight Management",
+    title: "Ship Flow Logistics OS",
+    summary: "A cloud shipping and freight forwarding software engineered for international container lines, clearing agents, and air/sea transport consolidators.",
+    features: [
+      { icon: "fa-earth-americas", text: "Real-time Live Vessel & Container GPS Telematics" },
+      { icon: "fa-file-lines", text: "Automated Bill of Lading (BL) & Manifest Generator" },
+      { icon: "fa-scale-balanced", text: "Customs Duty Calculator & Clearance Workflow" },
+      { icon: "fa-warehouse", text: "Bonded CFS Warehouse Cargo Inventory Management" },
+      { icon: "fa-dollar-sign", text: "Multi-currency Demurrage & Freight Rate Sheets" },
+      { icon: "fa-mobile-retro", text: "Consignee Self-Service Tracking Portal" }
+    ]
+  },
+  TrackOnMoves: {
+    badge: "Fleet Telematics Platform",
+    title: "TrackOnMoves GPS & Fleet Management",
+    summary: "Precision fleet telematics engine offering complete visibility over heavy vehicle fleets, commercial delivery vans, route optimizations, and driver safety standards.",
+    features: [
+      { icon: "fa-satellite", text: "High-Frequency Sub-Second Live GPS Vehicle Tracking" },
+      { icon: "fa-gas-pump", text: "Ultrasonic Fuel Sensor & Theft Siphon Alerts" },
+      { icon: "fa-route", text: "Smart Multi-Stop Route Optimization & Geofencing" },
+      { icon: "fa-id-card", text: "Driver Behavior Scoring (Harsh Braking / Speeding)" },
+      { icon: "fa-wrench", text: "Automated Preventive Maintenance & Tire Log" },
+      { icon: "fa-power-off", text: "Remote Engine Immobilization Via Mobile App" }
+    ]
+  },
+  PostMarrow: {
+    badge: "Cybersecurity & Email Protection",
+    title: "Post Marrow Business Security Suite",
+    summary: "Hardened email infrastructure engineered to block spear-phishing, business email compromise (BEC), and malware payloads before they ever reach company mailboxes.",
+    features: [
+      { icon: "fa-shield-virus", text: "AI-Powered Zero-Day Phishing & Malware Scanners" },
+      { icon: "fa-key", text: "Automated PGP / S-MIME Email Vault Encryption" },
+      { icon: "fa-envelope-open-text", text: "DMARC, DKIM & SPF Automated Alignment Engine" },
+      { icon: "fa-server", text: "High-Availability 99.999% Redundant MX Mail Gateways" },
+      { icon: "fa-database", text: "Compliant 7-Year Immutable Email Archiving" },
+      { icon: "fa-user-lock", text: "Adaptive 2FA & Suspicious Login Geolocation Lockout" }
+    ]
+  },
+  Mobilient: {
+    badge: "Device Fleet Security",
+    title: "Mobilient Mobile Device Management (MDM)",
+    summary: "Centralized control console for provisioning, monitoring, and locking corporate Android, iOS, Windows, and rugged handheld warehouse devices.",
+    features: [
+      { icon: "fa-tablet-screen-button", text: "Zero-Touch Corporate Device Enrollment & Kiosk Mode" },
+      { icon: "fa-ban", text: "Remote Wipe & Stolen Asset Lockdown Command" },
+      { icon: "fa-cloud-arrow-down", text: "Enterprise Private App Catalog Distribution" },
+      { icon: "fa-network-wired", text: "Automated Corporate VPN & Wi-Fi Certificate Push" },
+      { icon: "fa-camera-retro", text: "Hardware Policy Enforcement (Camera/USB Disabling)" },
+      { icon: "fa-chart-line", text: "OS Version Compliance & Patch Management" }
+    ]
+  },
+  Signvero: {
+    badge: "Digital Display Network",
+    title: "Signvero Cloud Signage",
+    summary: "Manage commercial display screens, interactive touch kiosks, digital menu boards, and factory alert displays from any web browser.",
+    features: [
+      { icon: "fa-display", text: "Central Cloud Media Scheduler for 4K Video/Graphics" },
+      { icon: "fa-triangle-exclamation", text: "Instant Emergency Alert Override Broadcasting" },
+      { icon: "fa-layer-group", text: "Multi-Zone Layouts (Weather, News, Live Tickers)" },
+      { icon: "fa-wifi", text: "Offline Caching & Automatic Sync Recovery" },
+      { icon: "fa-rotate", text: "Supports Android TV, Raspberry Pi, Windows & LG WebOS" },
+      { icon: "fa-chart-pie", text: "Screen Uptime & Proof-of-Play Audit Analytics" }
+    ]
+  },
+  ERPCRM: {
+    badge: "Core Enterprise Engine",
+    title: "Unified ERP & CRM Architecture",
+    summary: "Tailor-made Enterprise Resource Planning that connects supply chain, human capital, point-of-sale, and multi-tier finance into a cohesive real-time ledger.",
+    features: [
+      { icon: "fa-boxes-stacked", text: "Multi-Warehouse Automated Inventory Reordering" },
+      { icon: "fa-users-gear", text: "Human Resources, Biometric Attendance & Payroll" },
+      { icon: "fa-handshake", text: "Sales Pipeline Forecasting & Quotation Engine" },
+      { icon: "fa-calculator", text: "Multi-currency Tax, Audit & General Ledger Accounting" },
+      { icon: "fa-link", text: "RESTful API Integration with Banks & Custom Portals" },
+      { icon: "fa-shield", text: "Granular Departmental Access Control & History Auditing" }
+    ]
+  },
+  Itmenaan: {
+    badge: "Online Marketplace",
+    title: "Itmenaan Buy & Sell Marketplace",
+    summary: "Pakistan's trusted online marketplace connecting buyers and sellers across the country. A modern, mobile-first platform for posting ads, discovering deals, and trading safely across every category.",
+    features: [
+      { icon: "fa-store", text: "Verified Seller Profiles & Trust Badges" },
+      { icon: "fa-comments", text: "Secure In-App Buyer-Seller Chat" },
+      { icon: "fa-layer-group", text: "Multi-Category Listings with Smart Filters" },
+      { icon: "fa-location-dot", text: "Location-Based Search Across Pakistan" },
+      { icon: "fa-rectangle-ad", text: "Featured Ads & Promoted Placements" },
+      { icon: "fa-mobile-screen", text: "Fast Native-Feel Mobile Experience" }
+    ]
+  },
+  Microsoft365: {
+    badge: "Productivity Cloud",
+    title: "Microsoft 365 Suite",
+    summary: "Boost productivity with Microsoft 365 — powerful Office apps, AI-powered Copilot assistance, and trusted cloud storage, deployed and managed for your team.",
+    features: [
+      { icon: "fa-file-word", text: "Word, Excel, PowerPoint & Outlook Apps" },
+      { icon: "fa-robot", text: "Copilot AI Assistance Built Into Office" },
+      { icon: "fa-cloud", text: "1TB OneDrive Cloud Storage Per User" },
+      { icon: "fa-users", text: "Teams Collaboration & Video Meetings" },
+      { icon: "fa-envelope", text: "Exchange Business Email & Calendar" },
+      { icon: "fa-shield-halved", text: "Defender Security & Device Management" }
+    ]
+  }
+};
+
+function openProductModal(card){
+  const key = card.dataset.modal;
+  const data = productData[key];
+  if (!data) return;
+  document.getElementById('modalBadge').textContent = data.badge;
+  document.getElementById('modalTitle').textContent = data.title;
+  document.getElementById('modalSummary').textContent = data.summary;
+  const featBox = document.getElementById('modalFeatures');
+  featBox.innerHTML = '';
+  data.features.forEach(f => {
+    const d = document.createElement('div');
+    d.className = 'm-feat';
+    d.innerHTML = '<i class="fa-solid ' + f.icon + '"></i><span></span>';
+    d.querySelector('span').textContent = f.text;
+    featBox.appendChild(d);
+  });
+  const srcV = card.querySelector('video');
+  const mv = document.getElementById('modalVideo');
+  if (srcV){
+    mv.poster = srcV.getAttribute('poster') || '';
+    const src = srcV.getAttribute('src');
+    if (mv.getAttribute('src') !== src) mv.setAttribute('src', src);
+    mv.play().catch(()=>{});
+  }
+  const visit = document.getElementById('modalVisit');
+  if (card.dataset.url) visit.href = card.dataset.url;
+  document.getElementById('productModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeProductModal(){
+  document.getElementById('productModal').classList.remove('active');
+  document.body.style.overflow = '';
+  const mv = document.getElementById('modalVideo');
+  mv.pause();
+}
+document.getElementById('modalX').addEventListener('click', closeProductModal);
+document.getElementById('modalCloseBtn').addEventListener('click', closeProductModal);
+document.getElementById('productModal').addEventListener('click', e => {
+  if (e.target.id === 'productModal') closeProductModal();
+});
+addEventListener('keydown', e => { if (e.key === 'Escape') closeProductModal(); });
 
 // ===== 3D product river: auto right-to-left + drag + arrows =====
 (function(){
@@ -493,12 +765,12 @@ document.querySelectorAll('.rv').forEach(el => io.observe(el));
     window.addEventListener('pointercancel', onDragEnd);
   });
   stage.addEventListener('dragstart', e => e.preventDefault());
-  // plain click on a card (not a drag) -> open its product page
+  // plain click on a card (not a drag) -> open its detail modal
   cards.forEach(card => {
-    card.addEventListener('click', () => {
-      if (dragDist > 8) return; // it was a drag, not a click
-      const url = card.dataset.url;
-      if (url) window.location.href = url;
+    card.addEventListener('click', e => {
+      if (dragDist > 8) { e.preventDefault(); return; } // drag, not a click
+      if (e.target.closest('a')) return; // "Learn more" keeps its product-page link
+      openProductModal(card);
     });
   });
   stage.addEventListener('mouseenter', () => { hovering = true; targetSpeed = 0; });
@@ -510,12 +782,19 @@ document.querySelectorAll('.rv').forEach(el => io.observe(el));
   }
   prev.addEventListener('click', () => nudge(-1));
   next.addEventListener('click', () => nudge(1));
-  // video play/pause: only near-center cards play, and only when stage in view
+  // video play/pause: thumbnail shows by default; video plays on hover (desktop).
+  // on touch devices (no hover) the near-center card plays, as before.
+  const hoverFine = matchMedia('(hover:hover)').matches;
   const vids = cards.map(c => c.querySelector('video'));
+  cards.forEach(c => {
+    c.addEventListener('mouseenter', () => { c._hov = true; });
+    c.addEventListener('mouseleave', () => { c._hov = false; });
+  });
   setInterval(() => {
     vids.forEach((v, i) => {
       const near = Math.abs(cards[i]._t || 0) < .55;
-      if (near && inView && !document.hidden) v.play().catch(()=>{});
+      const want = hoverFine ? !!cards[i]._hov : near;
+      if (want && inView && !document.hidden) v.play().catch(()=>{});
       else v.pause();
     });
   }, 500);
@@ -532,6 +811,68 @@ document.querySelectorAll('.rv').forEach(el => io.observe(el));
     else v.pause();
   }), {threshold:.25});
   document.querySelectorAll('.vid-banner video').forEach(v => vio.observe(v));
+})();
+
+// ===== ADVANCED LAYER =====
+(function(){
+  const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // split headline into masked words
+  const h1=document.querySelector('.hero h1');let d=0;
+  h1.innerHTML=Array.from(h1.childNodes).map(n=>{
+    const cls=n.nodeType===1?' class="'+n.className+'"':'';
+    return (n.textContent).split(/(\s+)/).map(t=>/^\s*$/.test(t)?t:'<span class="w"><span'+cls+' style="transition-delay:'+(.25+(d++)*.14)+'s">'+t+'</span></span>').join('');
+  }).join('');
+  // loader -> ready
+  const ld=document.getElementById('loader'),t0=performance.now();
+  function go(){const w=Math.max(0,(RM?0:1500)-(performance.now()-t0));setTimeout(()=>{ld.classList.add('out');document.body.classList.add('ready');setTimeout(()=>ld.classList.add('gone'),1000)},w)}
+  document.readyState==='complete'?go():addEventListener('load',go);
+  // scroll progress + parallax var
+  const pg=document.getElementById('progress');
+  function onS(){const m=document.documentElement.scrollHeight-innerHeight;pg.style.transform='scaleX('+(m>0?scrollY/m:0)+')';document.body.style.setProperty('--sy',scrollY)}
+  addEventListener('scroll',onS,{passive:true});onS();
+  // cursor glow + card spotlight
+  const glow=document.getElementById('glow');let gx=innerWidth/2,gy=200,tx=gx,ty=gy;
+  addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY},{passive:true});
+  (function gl(){gx+=(tx-gx)*.12;gy+=(ty-gy)*.12;glow.style.transform='translate('+gx+'px,'+gy+'px)';requestAnimationFrame(gl)})();
+  document.querySelectorAll('.card').forEach((c,i)=>{
+    c.style.transitionDelay=(i%4*.08)+'s,0s,0s,0s';
+    c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')});
+  });
+  // heading underline trigger
+  document.querySelectorAll('.sec-head h2').forEach(h=>new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){h.classList.add('in');o.disconnect()}}),{threshold:.6}).observe(h));
+
+  // ===== full-page particle network (mouse-reactive, click burst, scroll parallax) =====
+  const cv=document.getElementById('fx'),cx=cv.getContext('2d');
+  const ring=document.getElementById('ring'),dot=document.getElementById('dot');
+  const fine=matchMedia('(hover:hover)').matches;
+  let rx=tx,ry=ty;
+  if(fine&&!RM){addEventListener('pointermove',()=>{ring.classList.add('on');dot.classList.add('on')},{once:true});
+    (function rl(){rx+=(tx-rx)*.18;ry+=(ty-ry)*.18;ring.style.transform='translate('+rx+'px,'+ry+'px)';dot.style.transform='translate('+tx+'px,'+ty+'px)';requestAnimationFrame(rl)})();
+    document.addEventListener('pointerover',e=>ring.classList.toggle('big',!!e.target.closest('a,button,.p-card,.card,.stage-3d')));}
+  // magnetic buttons
+  if(fine&&!RM)document.querySelectorAll('.btn,.car-btn').forEach(b=>{
+    b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.translate=((e.clientX-r.left-r.width/2)*.22)+'px '+((e.clientY-r.top-r.height/2)*.3)+'px'});
+    b.addEventListener('pointerleave',()=>{b.style.translate=''});});
+  // scrollspy
+  const links=[...document.querySelectorAll('.nav-links a[href^="#"]')];
+  const spy=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-45% 0px -50% 0px'});
+  document.querySelectorAll('section[id]').forEach(x=>spy.observe(x));
+  if(RM)return;
+  let W,H,P=[],B=[],mx=-999,my=-999;
+  function size(){const dp=Math.min(2,devicePixelRatio||1);W=innerWidth;H=innerHeight;cv.width=W*dp;cv.height=H*dp;cx.setTransform(dp,0,0,dp,0,0);
+    P=Array.from({length:Math.min(110,Math.round(W*H/16000))},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,d:.05+Math.random()*.2,yy:0}))}
+  addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY},{passive:true});
+  document.addEventListener('pointerleave',()=>{mx=my=-999});
+  addEventListener('pointerdown',e=>{for(let i=0;i<14;i++){const a=i/14*6.283;B.push({x:e.clientX,y:e.clientY,vx:Math.cos(a)*(1.5+Math.random()*2),vy:Math.sin(a)*(1.5+Math.random()*2),l:1})}});
+  addEventListener('resize',size);size();
+  (function draw(){requestAnimationFrame(draw);if(document.hidden)return;cx.clearRect(0,0,W,H);
+    for(const p of P){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H+400)p.vy*=-1;p.yy=(((p.y-scrollY*p.d)%H)+H)%H}
+    for(let i=0;i<P.length;i++){const p=P[i];let dx=p.x-mx,dy=p.yy-my,dm=Math.hypot(dx,dy);if(dm<140&&dm>0){p.x+=dx/dm*1.2;p.y+=dy/dm*1.2}
+      cx.fillStyle='rgba(140,190,255,.7)';cx.beginPath();cx.arc(p.x,p.yy,1.7,0,6.283);cx.fill();
+      for(let j=i+1;j<P.length;j++){const q=P[j],d=Math.hypot(p.x-q.x,p.yy-q.yy);if(d<125){cx.strokeStyle='rgba(110,170,255,'+(.2*(1-d/125))+')';cx.beginPath();cx.moveTo(p.x,p.yy);cx.lineTo(q.x,q.yy);cx.stroke()}}
+      if(dm<180){cx.strokeStyle='rgba(185,218,255,'+(.42*(1-dm/180))+')';cx.beginPath();cx.moveTo(p.x,p.yy);cx.lineTo(mx,my);cx.stroke()}}
+    for(let i=B.length-1;i>=0;i--){const b=B[i];b.x+=b.vx;b.y+=b.vy;b.vx*=.95;b.vy*=.95;b.l-=.025;if(b.l<=0){B.splice(i,1);continue}
+      cx.fillStyle='rgba(160,205,255,'+b.l+')';cx.beginPath();cx.arc(b.x,b.y,2.2*b.l+.4,0,6.283);cx.fill()}})();
 })();
 </script>
 </body>
