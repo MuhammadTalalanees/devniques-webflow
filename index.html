@@ -76,7 +76,11 @@ a{text-decoration:none;color:inherit}
 .hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(120,175,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(120,175,255,.09) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 30%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 30%,transparent 75%);opacity:.6;pointer-events:none;animation:gridPan 24s linear infinite}
 @keyframes gridPan{from{background-position:0 0}to{background-position:56px 56px}}
 .hero-inner{position:relative;max-width:860px;margin:0 auto}
-.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:22px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:2.5px;color:var(--cyan);text-transform:uppercase;margin-bottom:22px;padding:9px 20px;border-radius:999px;background:rgba(0,240,255,.06);border:1px solid rgba(0,240,255,.35);box-shadow:0 0 26px rgba(0,240,255,.16),inset 0 0 20px rgba(0,240,255,.05);position:relative;overflow:hidden}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan);animation:ebPulse 2.2s ease-in-out infinite;flex-shrink:0}
+.eyebrow::after{content:"";position:absolute;top:0;bottom:0;width:56px;left:-80px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.30),transparent);transform:skewX(-18deg);animation:ebShine 4s ease-in-out infinite}
+@keyframes ebPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:.5}}
+@keyframes ebShine{0%,55%{left:-80px}100%{left:135%}}
 .hero h1{font-size:clamp(42px,6.4vw,76px);font-weight:800;letter-spacing:-2.5px;line-height:1.04;margin-bottom:24px}
 .hero h1 .accent{background:linear-gradient(100deg,#2b7fff 10%,#00f0ff 45%,#8a2be2 90%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:accentFlow 6s linear infinite}
 @keyframes accentFlow{to{background-position:200% center}}
@@ -172,7 +176,7 @@ footer{border-top:1px solid var(--line);background:rgba(6,14,36,.55);backdrop-fi
   .vid-banner{aspect-ratio:16/8}
 }
 @media(prefers-reduced-motion:reduce){
-  .marquee-track,.blob,.bg-spin,.hero-grid-bg,.hero h1 .accent,.btn::before,.nav::after,.cta-band::after,.brand img{animation:none!important}
+  .marquee-track,.blob,.bg-spin,.hero-grid-bg,.hero h1 .accent,.btn::before,.nav::after,.cta-band::after,.brand img,.eyebrow::before,.eyebrow::after,.eng-core,.eng-dot{animation:none!important}
   .rv{opacity:1;transform:none}
 }
 
@@ -237,6 +241,50 @@ body.ready .hero h1 .w>span{transform:none}
 .m-feat span{font-size:13.5px;font-weight:600;color:#e4efff;line-height:1.45}
 .modal-footer{display:flex;gap:12px;justify-content:flex-end;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap}
 @media(max-width:560px){.modal-features{grid-template-columns:1fr}.modal-body{padding:24px 22px 26px}.modal-media{height:160px}}
+/* ===== SERVICE CARDS -> RICH MODALS ===== */
+.svc-card{cursor:pointer}
+.svc-card:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.svc-ico{width:52px;height:52px;border-radius:15px;background:linear-gradient(135deg,#00f0ff,#2b7fff 60%,#8a2be2);display:flex;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 8px 24px rgba(0,200,255,.35)}
+.svc-ico i{font-size:22px;color:#fff}
+.svc-more{display:inline-flex;align-items:center;gap:8px;margin-top:16px;color:var(--accent);font-weight:600;font-size:14.5px}
+.svc-more i{transition:transform .2s}
+.svc-card:hover .svc-more i{transform:translateX(5px)}
+.svc-modal-ico{width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,#00f0ff,#2b7fff 60%,#8a2be2);display:flex;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 10px 30px rgba(0,200,255,.4)}
+.svc-modal-ico i{font-size:27px;color:#fff}
+.svc-included{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;margin-bottom:28px}
+.svc-inc{display:flex;align-items:center;gap:11px;font-size:14.5px;font-weight:600;color:#e4efff}
+.svc-inc i{color:#2dd4bf;font-size:18px;flex-shrink:0}
+@media(max-width:560px){.svc-included{grid-template-columns:1fr}}
+/* ===== CAROUSEL LIVE CAPTION ===== */
+.car-cap{margin:22px auto 0;max-width:1200px;padding:0 24px}
+.car-cap-top{display:flex;align-items:baseline;gap:16px;min-height:32px;margin-bottom:10px;flex-wrap:wrap}
+.car-cap-name{font-family:'Space Grotesk','Plus Jakarta Sans',sans-serif;font-size:23px;font-weight:700;letter-spacing:-.5px;color:#fff;transition:opacity .16s ease}
+.car-cap-cat{font-size:12px;font-weight:700;letter-spacing:2.5px;color:var(--cyan);transition:opacity .16s ease}
+.car-cap-fade{opacity:0}
+.car-cap-count{display:flex;align-items:center;gap:14px}
+.car-cap-idx{font-size:15px;font-weight:800;color:#fff;min-width:26px}
+.car-cap-bar{flex:1;max-width:230px;height:3px;border-radius:3px;background:rgba(255,255,255,.13);overflow:hidden}
+.car-cap-bar i{display:block;height:100%;width:10%;border-radius:3px;background:linear-gradient(90deg,var(--cyan),var(--blue));box-shadow:0 0 10px rgba(0,240,255,.6);transition:width .45s ease}
+.car-cap-total{font-size:14px;font-weight:600;color:#7e93bd}
+/* ===== DEVNIQUES ENGINE ===== */
+.engine-wrap{position:relative;width:min(560px,94vw);aspect-ratio:1/1;margin:8px auto 0}
+.eng-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(120,175,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(120,175,255,.09) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(circle,#000 42%,transparent 72%);mask-image:radial-gradient(circle,#000 42%,transparent 72%)}
+.eng-orbit{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border:1.5px dashed rgba(0,240,255,.30);border-radius:50%}
+.eng-orbit-a{width:min(460px,82vw);height:min(460px,82vw)}
+.eng-orbit-b{width:min(310px,56vw);height:min(310px,56vw);border-color:rgba(138,43,226,.40)}
+.eng-core{position:absolute;left:50%;top:50%;width:118px;height:118px;margin:-59px 0 0 -59px;border-radius:50%;background:linear-gradient(135deg,#00f0ff 0%,#2b7fff 55%,#8a2be2 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 0 60px rgba(0,240,255,.55),0 0 150px rgba(43,127,255,.28);animation:engCorePulse 3.4s ease-in-out infinite;z-index:2}
+.eng-core i{font-size:44px;color:#fff;filter:drop-shadow(0 0 14px rgba(255,255,255,.55))}
+@keyframes engCorePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.eng-chip{position:absolute;left:50%;top:50%;z-index:3;will-change:transform}
+.eng-chip-in{display:inline-flex;align-items:center;gap:9px;background:rgba(6,16,40,.94);border:1px solid rgba(0,240,255,.5);border-radius:13px;padding:10px 16px;font-size:12px;font-weight:700;letter-spacing:1.6px;color:#d3f7ff;box-shadow:0 0 20px rgba(0,240,255,.28);white-space:nowrap}
+.eng-chip-in i{color:var(--cyan);font-size:15px}
+.eng-caption{position:absolute;left:50%;bottom:0;transform:translateX(-50%);display:flex;align-items:center;gap:9px;font-size:11.5px;font-weight:700;letter-spacing:2.5px;color:var(--cyan);white-space:nowrap;z-index:2}
+.eng-dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan);animation:ebPulse 2.2s ease-in-out infinite}
+@media(max-width:600px){
+  .eng-core{width:92px;height:92px;margin:-46px 0 0 -46px}
+  .eng-core i{font-size:34px}
+  .eng-chip-in{padding:8px 12px;font-size:10.5px;letter-spacing:1.2px}
+}
 </style>
 </head>
 <body id="top">
@@ -348,6 +396,31 @@ body.ready .hero h1 .w>span{transform:none}
     </div>
   </div>
  
+  <div class="wrap"><div class="car-cap rv">
+    <div class="car-cap-top"><span class="car-cap-name" id="carCapName">BuzzFlow</span><span class="car-cap-cat" id="carCapCat">ENTERPRISE PLATFORM</span></div>
+    <div class="car-cap-count"><span class="car-cap-idx" id="carCapIdx">01</span><span class="car-cap-bar"><i id="carCapFill"></i></span><span class="car-cap-total" id="carCapTotal">/ 10</span></div>
+  </div></div>
+
+</section>
+
+<section id="engine">
+  <div class="wrap sec-head">
+    <span class="eyebrow rv">Core Technology</span>
+    <h2 class="rv">Devniques Engine</h2>
+    <p class="rv">One intelligent core powering data, edge, security, AI and cloud &mdash; always on, always moving.</p>
+  </div>
+  <div class="engine-wrap rv">
+    <div class="eng-grid"></div>
+    <div class="eng-orbit eng-orbit-a"></div>
+    <div class="eng-orbit eng-orbit-b"></div>
+    <div class="eng-core"><i class="fa-solid fa-atom"></i></div>
+    <div class="eng-chip" data-ring="a"><span class="eng-chip-in"><i class="fa-solid fa-database"></i>DATA</span></div>
+    <div class="eng-chip" data-ring="a"><span class="eng-chip-in"><i class="fa-solid fa-bolt"></i>EDGE</span></div>
+    <div class="eng-chip" data-ring="a"><span class="eng-chip-in"><i class="fa-solid fa-shield-halved"></i>SECURE</span></div>
+    <div class="eng-chip" data-ring="b"><span class="eng-chip-in"><i class="fa-solid fa-microchip"></i>AI CORE</span></div>
+    <div class="eng-chip" data-ring="b"><span class="eng-chip-in"><i class="fa-solid fa-cloud"></i>CLOUD</span></div>
+    <div class="eng-caption"><span class="eng-dot"></span>SMART TECH OS&nbsp;&nbsp;&bull;&nbsp;&nbsp;ACTIVE CLOUD</div>
+  </div>
 </section>
 
 <section id="offer">
@@ -361,14 +434,14 @@ body.ready .hero h1 .w>span{transform:none}
       <video muted loop playsinline autoplay preload="metadata" poster="videos/co-growth.jpg" src="videos/co-growth.mp4"></video>
     </div>
     <div class="grid-4">
-      <div class="card rv"><h3><a href="https://devniques.com/software-solutions/">Custom Software Solutions</a></h3><p>We develop tailored software solutions that address complex business challenges and streamline operations.</p></div>
-      <div class="card rv"><h3><a href="https://devniques.com/web-development/">Website Development</a></h3><p>Custom web development solutions engineered for performance, scalability, and business growth.</p></div>
-      <div class="card rv"><h3><a href="https://devniques.com/digital-marketing-and-seo-services/">Digital Marketing</a></h3><p>Drive traffic, increase visibility, and grow your brand with result-driven digital marketing and SEO strategies tailored to your business.</p></div>
-      <div class="card rv"><h3><a href="https://devniques.com/digital-commerce-2/">E-Commerce Solutions</a></h3><p>Create secure and user-friendly online stores that enhance customer experience and increase conversions.</p></div>
-      <div class="card rv"><h3><a href="https://devniques.com/mobile-applications/">Mobile App Development</a></h3><p>We create powerful native and cross-platform mobile applications that deliver seamless user experiences.</p></div>
-      <div class="card rv"><h3><a href="https://devniques.com/software-solutions/">UI/UX Design</a></h3><p>Create user-friendly interfaces and engaging experiences that improve usability and customer satisfaction.</p></div>
-      <div class="card rv"><h3><a href="https://devniques.com/managed-services/">Maintenance &amp; Support</a></h3><p>From managed IT services to staff augmentation, we provide reliable support and skilled resources to scale your operations.</p></div>
-      <div class="card rv"><h3><a href="https://devniques.com/emerging-technologies/">AI &amp; Machine Learning</a></h3><p>Leverage the latest technologies to stay ahead of the curve, including innovative solutions that future-proof your business.</p></div>
+      <div class="card rv svc-card" data-service="customSoftware" tabindex="0" role="button" aria-label="Custom Software Solutions — view details"><div class="svc-ico"><i class="fa-solid fa-code"></i></div><h3>Custom Software Solutions</h3><p>We develop tailored software solutions that address complex business challenges and streamline operations.</p><span class="svc-more">View details <i class="fa-solid fa-arrow-right"></i></span></div>
+      <div class="card rv svc-card" data-service="webDev" tabindex="0" role="button" aria-label="Website Development — view details"><div class="svc-ico"><i class="fa-solid fa-globe"></i></div><h3>Website Development</h3><p>Custom web development solutions engineered for performance, scalability, and business growth.</p><span class="svc-more">View details <i class="fa-solid fa-arrow-right"></i></span></div>
+      <div class="card rv svc-card" data-service="digitalMarketing" tabindex="0" role="button" aria-label="Digital Marketing — view details"><div class="svc-ico"><i class="fa-solid fa-bullhorn"></i></div><h3>Digital Marketing</h3><p>Drive traffic, increase visibility, and grow your brand with result-driven digital marketing and SEO strategies tailored to your business.</p><span class="svc-more">View details <i class="fa-solid fa-arrow-right"></i></span></div>
+      <div class="card rv svc-card" data-service="ecommerce" tabindex="0" role="button" aria-label="E-Commerce Solutions — view details"><div class="svc-ico"><i class="fa-solid fa-cart-shopping"></i></div><h3>E-Commerce Solutions</h3><p>Create secure and user-friendly online stores that enhance customer experience and increase conversions.</p><span class="svc-more">View details <i class="fa-solid fa-arrow-right"></i></span></div>
+      <div class="card rv svc-card" data-service="mobileApp" tabindex="0" role="button" aria-label="Mobile App Development — view details"><div class="svc-ico"><i class="fa-solid fa-mobile-screen-button"></i></div><h3>Mobile App Development</h3><p>We create powerful native and cross-platform mobile applications that deliver seamless user experiences.</p><span class="svc-more">View details <i class="fa-solid fa-arrow-right"></i></span></div>
+      <div class="card rv svc-card" data-service="uiux" tabindex="0" role="button" aria-label="UI/UX Design — view details"><div class="svc-ico"><i class="fa-solid fa-pen-ruler"></i></div><h3>UI/UX Design</h3><p>Create user-friendly interfaces and engaging experiences that improve usability and customer satisfaction.</p><span class="svc-more">View details <i class="fa-solid fa-arrow-right"></i></span></div>
+      <div class="card rv svc-card" data-service="maintenance" tabindex="0" role="button" aria-label="Maintenance &amp; Support — view details"><div class="svc-ico"><i class="fa-solid fa-headset"></i></div><h3>Maintenance &amp; Support</h3><p>From managed IT services to staff augmentation, we provide reliable support and skilled resources to scale your operations.</p><span class="svc-more">View details <i class="fa-solid fa-arrow-right"></i></span></div>
+      <div class="card rv svc-card" data-service="ai" tabindex="0" role="button" aria-label="AI &amp; Machine Learning — view details"><div class="svc-ico"><i class="fa-solid fa-robot"></i></div><h3>AI &amp; Machine Learning</h3><p>Leverage the latest technologies to stay ahead of the curve, including innovative solutions that future-proof your business.</p><span class="svc-more">View details <i class="fa-solid fa-arrow-right"></i></span></div>
     </div>
   </div>
 </section>
@@ -485,6 +558,25 @@ body.ready .hero h1 .w>span{transform:none}
       <div class="modal-footer">
         <button class="btn btn-outline btn-sm" id="modalCloseBtn">Close</button>
         <a class="btn btn-sm" id="modalVisit" href="#" target="_blank" rel="noopener">Visit Product Page <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Service detail modal -->
+<div class="modal-overlay" id="serviceModal">
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <button class="modal-close-btn" id="svcModalX" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    <div class="modal-body">
+      <span class="modal-badge">Our Service</span>
+      <div class="svc-modal-ico" id="svcModalIco"><i class="fa-solid fa-code"></i></div>
+      <h3 class="modal-title" id="svcModalTitle"></h3>
+      <p class="modal-summary" id="svcModalSummary"></p>
+      <div class="modal-feat-head">What&rsquo;s Included</div>
+      <div class="svc-included" id="svcModalIncluded"></div>
+      <div class="modal-footer">
+        <button class="btn btn-outline btn-sm" id="svcModalCloseBtn">Close</button>
+        <a class="btn btn-sm" id="svcModalRequest" href="#cta">Request This Service <i class="fa-solid fa-arrow-right"></i></a>
       </div>
     </div>
   </div>
@@ -679,7 +771,69 @@ document.getElementById('modalCloseBtn').addEventListener('click', closeProductM
 document.getElementById('productModal').addEventListener('click', e => {
   if (e.target.id === 'productModal') closeProductModal();
 });
-addEventListener('keydown', e => { if (e.key === 'Escape') closeProductModal(); });
+addEventListener('keydown', e => { if (e.key === 'Escape'){ closeProductModal(); closeServiceModal(); } });
+
+// ===== SERVICE DETAIL MODALS (What We Offer) =====
+const serviceData = {
+  customSoftware: { icon: "fa-code", title: "Custom Software Solutions",
+    summary: "We develop tailored software solutions that address complex business challenges and streamline operations.",
+    included: ["Discovery & Solution Architecture", "Agile Development Sprints", "QA, Testing & Hardening", "Deployment & DevOps Pipelines"] },
+  webDev: { icon: "fa-globe", title: "Website Development",
+    summary: "Custom web development solutions engineered for performance, scalability, and business growth.",
+    included: ["Custom Design & Development", "Performance Optimization", "Scalable Architecture", "SEO-Ready Build"] },
+  digitalMarketing: { icon: "fa-bullhorn", title: "Digital Marketing",
+    summary: "Drive traffic, increase visibility, and grow your brand with result-driven digital marketing and SEO strategies tailored to your business.",
+    included: ["SEO & Content Strategy", "Social Media Marketing", "Paid Ad Campaigns (PPC)", "Analytics & Reporting"] },
+  ecommerce: { icon: "fa-cart-shopping", title: "E-Commerce Solutions",
+    summary: "Create secure and user-friendly online stores that enhance customer experience and increase conversions.",
+    included: ["Online Store Setup", "Secure Payment Gateways", "Product & Inventory Management", "Conversion Optimization"] },
+  mobileApp: { icon: "fa-mobile-screen-button", title: "Mobile App Development",
+    summary: "We create powerful native and cross-platform mobile applications that deliver seamless user experiences.",
+    included: ["Native iOS & Android Apps", "Cross-Platform Development", "App Store Deployment", "Updates & Maintenance"] },
+  uiux: { icon: "fa-pen-ruler", title: "UI/UX Design",
+    summary: "Create user-friendly interfaces and engaging experiences that improve usability and customer satisfaction.",
+    included: ["User Research & Wireframes", "UI Design Systems", "Interactive Prototypes", "Usability Testing"] },
+  maintenance: { icon: "fa-headset", title: "Maintenance & Support",
+    summary: "From managed IT services to staff augmentation, we provide reliable support and skilled resources to scale your operations.",
+    included: ["24/7 Monitoring & Support", "Managed IT Services", "Staff Augmentation", "Updates & Backups"] },
+  ai: { icon: "fa-robot", title: "AI & Machine Learning",
+    summary: "Leverage the latest technologies to stay ahead of the curve, including innovative solutions that future-proof your business.",
+    included: ["AI Chatbots & Assistants", "Machine Learning Models", "Process Automation", "Predictive Analytics"] }
+};
+function openServiceModal(key){
+  const d = serviceData[key];
+  if (!d) return;
+  document.getElementById('svcModalIco').innerHTML = '<i class="fa-solid ' + d.icon + '"></i>';
+  document.getElementById('svcModalTitle').textContent = d.title;
+  document.getElementById('svcModalSummary').textContent = d.summary;
+  const box = document.getElementById('svcModalIncluded');
+  box.innerHTML = '';
+  d.included.forEach(t => {
+    const el = document.createElement('div');
+    el.className = 'svc-inc';
+    el.innerHTML = '<i class="fa-solid fa-circle-check"></i><span></span>';
+    el.querySelector('span').textContent = t;
+    box.appendChild(el);
+  });
+  document.getElementById('serviceModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeServiceModal(){
+  document.getElementById('serviceModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.svc-card').forEach(c => {
+  c.addEventListener('click', () => openServiceModal(c.dataset.service));
+  c.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openServiceModal(c.dataset.service); }
+  });
+});
+document.getElementById('svcModalX').addEventListener('click', closeServiceModal);
+document.getElementById('svcModalCloseBtn').addEventListener('click', closeServiceModal);
+document.getElementById('svcModalRequest').addEventListener('click', closeServiceModal);
+document.getElementById('serviceModal').addEventListener('click', e => {
+  if (e.target.id === 'serviceModal') closeServiceModal();
+});
 
 // ===== 3D product river: auto right-to-left + drag + arrows =====
 (function(){
@@ -697,6 +851,32 @@ addEventListener('keydown', e => { if (e.key === 'Escape') closeProductModal(); 
   let speed = AUTO, targetSpeed = AUTO;
   let dragging = false, dragX = 0, dragS = 0, vel = 0, lastPX = 0, dragDist = 0;
   let hovering = false, inView = true, arrowAnim = null;
+  // ===== live caption: front product name + category + 07/10 progress =====
+  const capName = document.getElementById('carCapName'), capCat = document.getElementById('carCapCat'),
+        capIdx = document.getElementById('carCapIdx'), capFill = document.getElementById('carCapFill'),
+        capTotal = document.getElementById('carCapTotal');
+  const prodCats = {"BuzzFlow":"Enterprise Platform","Post Marrow":"Email Security","Signvero":"Digital Signage",
+    "Mobilient MDM":"Device Security","Ship Flow":"Logistics OS","TrackOnMoves":"Fleet Telematics",
+    "Itmenaan":"Marketplace","Hospital Management":"Healthcare Cloud","Microsoft 365":"Productivity Cloud",
+    "ERP & CRM":"Business Suite"};
+  let capCur = -1;
+  function updateCap(){
+    let bi = 0, bv = 1e9;
+    for (let i = 0; i < N; i++){ const a = Math.abs(cards[i]._t || 0); if (a < bv){ bv = a; bi = i; } }
+    if (bi === capCur) return;
+    capCur = bi;
+    const h3 = cards[bi].querySelector('h3');
+    const nm = h3 ? h3.textContent.trim() : '';
+    capName.classList.add('car-cap-fade'); capCat.classList.add('car-cap-fade');
+    setTimeout(() => {
+      capName.textContent = nm;
+      capCat.textContent = (prodCats[nm] || '').toUpperCase();
+      capIdx.textContent = String(bi + 1).padStart(2, '0');
+      capTotal.textContent = '/ ' + String(N).padStart(2, '0');
+      capFill.style.width = ((bi + 1) / N * 100).toFixed(1) + '%';
+      capName.classList.remove('car-cap-fade'); capCat.classList.remove('car-cap-fade');
+    }, 140);
+  }
 
   function measure(){
     CW = stage.clientWidth < 640 ? 300 : 400;
@@ -739,6 +919,7 @@ addEventListener('keydown', e => { if (e.key === 'Escape') closeProductModal(); 
       c.style.pointerEvents = vis > .35 ? 'auto' : 'none';
       c._t = t;
     }
+    updateCap();
   }
   // drag (window-level move/up so no pointer capture is needed; card clicks stay native)
   function onDragMove(e){
@@ -879,6 +1060,37 @@ addEventListener('keydown', e => { if (e.key === 'Escape') closeProductModal(); 
       if(dm<180){cx.strokeStyle='rgba(185,218,255,'+(.42*(1-dm/180))+')';cx.beginPath();cx.moveTo(p.x,p.yy);cx.lineTo(mx,my);cx.stroke()}}
     for(let i=B.length-1;i>=0;i--){const b=B[i];b.x+=b.vx;b.y+=b.vy;b.vx*=.95;b.vy*=.95;b.l-=.025;if(b.l<=0){B.splice(i,1);continue}
       cx.fillStyle='rgba(160,205,255,'+b.l+')';cx.beginPath();cx.arc(b.x,b.y,2.2*b.l+.4,0,6.283);cx.fill()}})();
+})();
+// ===== DEVNIQUES ENGINE: JS-driven orbit (chips stay upright) =====
+(function(){
+  const wrap = document.querySelector('.engine-wrap');
+  if (!wrap) return;
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const rings = [
+    { chips: Array.from(wrap.querySelectorAll('.eng-chip[data-ring="a"]')), ring: wrap.querySelector('.eng-orbit-a'), speed: 0.28, ang: 0 },
+    { chips: Array.from(wrap.querySelectorAll('.eng-chip[data-ring="b"]')), ring: wrap.querySelector('.eng-orbit-b'), speed: -0.38, ang: 0 }
+  ];
+  rings.forEach(rg => rg.chips.forEach((c, i) => { c._a0 = (i / rg.chips.length) * Math.PI * 2; }));
+  function place(){
+    rings.forEach(rg => {
+      const R = rg.ring.offsetWidth / 2;
+      rg.chips.forEach(c => {
+        const a = c._a0 + rg.ang;
+        c.style.transform = 'translate(' + (Math.cos(a) * R).toFixed(1) + 'px,' + (Math.sin(a) * R).toFixed(1) + 'px) translate(-50%,-50%)';
+      });
+    });
+  }
+  let last = performance.now();
+  function tick(ts){
+    const dt = Math.min(0.05, (ts - last) / 1000);
+    last = ts;
+    if (!RM && !document.hidden) rings.forEach(rg => { rg.ang += rg.speed * dt; });
+    place();
+    requestAnimationFrame(tick);
+  }
+  addEventListener('resize', place);
+  place();
+  requestAnimationFrame(tick);
 })();
 </script>
 </body>
